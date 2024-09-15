@@ -20,6 +20,8 @@
 
 Сценарии и диаграммы представлены [тут](use-case.pdf)
 
+Create scripts для таблиц, функций и тестовых данных [тут](create-scripts.pdf)
+
 
 ## Первая итерация
 
@@ -31,4 +33,13 @@
 
 ## Вторая итерация
 
+Все функции БД мы решили перенести в backend для дальнейшей оптимизации.
 
+- functions from DB
+- add new user role(supervisor)
+
+## Третья итерация
+
+- optimization
+- specification
+- unit-tests
