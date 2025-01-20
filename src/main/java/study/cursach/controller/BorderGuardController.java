@@ -140,7 +140,7 @@ public class BorderGuardController {
     @PostMapping("/company")
     public ResponseEntity<?> getCompany(@RequestBody Id id){
         try{
-            return ResponseEntity.ok(getByIdService.getCompanyName(id.getId()));
+            return ResponseEntity.ok(getByIdService.getCompanyName(id.getId(), 1));
         } catch (Exception e){
             return ResponseEntity.badRequest().body("База данных умерла :((((");
         }

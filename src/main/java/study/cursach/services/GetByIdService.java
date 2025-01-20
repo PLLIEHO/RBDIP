@@ -16,13 +16,15 @@ public class GetByIdService {
     private final JobTypeRepository jobTypeRepository;
     private final EntryListRepository entryListRepository;
     private final CustomsCategoryRepository customsCategoryRepository;
+    private final CountryEntityRepository countryEntityRepository;
 
     public GetByIdService(CompanyRepository companyRepository,
                           JobEntityRepository jobEntityRepository,
                           EntryPurposeRepository entryPurposeRepository,
                           JobTypeRepository jobTypeRepository,
                           EntryListRepository entryListRepository,
-                          CustomsCategoryRepository customsCategoryRepository){
+                          CustomsCategoryRepository customsCategoryRepository,
+                          CountryEntityRepository countryEntityRepository){
 
         this.companyRepository = companyRepository;
         this.jobEntityRepository = jobEntityRepository;
@@ -30,6 +32,7 @@ public class GetByIdService {
         this.jobTypeRepository = jobTypeRepository;
         this.entryListRepository = entryListRepository;
         this.customsCategoryRepository = customsCategoryRepository;
+        this.countryEntityRepository = countryEntityRepository;
     }
 
 
@@ -41,9 +44,15 @@ public class GetByIdService {
         }
     }
 
-    public String getCompanyName(int id){
+    public String getCompanyName(int id, int flag){
         try {
-            return companyRepository.findById(id).get().getName();
+            int company_id;
+            if (flag == 0) {
+                company_id = jobEntityRepository.findById(id).get().getCompany_id();
+            } else {
+                company_id = id;
+            }
+            return companyRepository.findById(company_id).get().getName();
         } catch (Exception e){
             return "false";
         }
@@ -57,6 +66,14 @@ public class GetByIdService {
         }
     }
 
+    public String getCountryName(int id){
+        try {
+            return countryEntityRepository.findById(id).get().getName();
+        } catch (Exception e){
+            return "false";
+        }
+    }
+
     public boolean isInEntryList(int id){
         try{
             entryListRepository.findById(id).get();
@@ -65,6 +82,7 @@ public class GetByIdService {
             return false;
         }
     }
+
 
     public List<String> getCustomsInfo(int id){
         List<String> output = new ArrayList<>();

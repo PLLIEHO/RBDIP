@@ -29,26 +29,19 @@ public class BdFunctionsService {
     }
 
     public void nextOne(boolean accepted){
-        NextGeneratedEntity now = nextGeneratedEntityRepository.findAllByOrderById().getFirst();
+        NextGeneratedEntity now = nextGeneratedEntityRepository.findAllByOrderById().get(0);
 
         if (accepted){
-            nextGeneratedEntityRepository.allow(passportRepository.findAll().getLast().getId());
+            var pass = passportRepository.findAll();
+            nextGeneratedEntityRepository.allow(pass.get(pass.size() - 1).getId());
         }
-
-//        nextGeneratedEntityRepository.next_one(now.getName(), now.getSurname(), now.getLastname(), now.getNationality(),
-//                now.getEyeColor(), now.getFingerprint(), now.getPsname(), now.getPssurname(), now.getPslastname(),
-//                now.getPseyeColor(), now.getPsnationality(), now.getEnname(), now.getEnsurname(), now.getEnlastname(),
-//                now.getEndateGaned(), now.getEndateExpired(), now.getEnpurpose(), now.getWorkname(), now.getWorksurname(),
-//                now.getWorklastname(), now.getWorkcompany(), now.getLugsize(), now.getLugweight(), now.getLugcategory(),
-//                now.getDecname(), now.getDecsurname(), now.getDeclastname(), now.getDecsize(), now.getDecweight(),
-//                now.getDeccat());
 
         nextGeneratedEntityRepository.deleteById(now.getId());
         // Удаляем прибывшиго гостя, так как он уже не следующий
     }
 
     public Validation validate() throws InterruptedException {
-        NextGeneratedEntity now = nextGeneratedEntityRepository.findAllByOrderById().getFirst();
+        NextGeneratedEntity now = nextGeneratedEntityRepository.findAllByOrderById().get(0);
 
         nextGeneratedEntityRepository.next_one(now.getName(), now.getSurname(), now.getLastname(), now.getNationality(),
                 now.getEyeColor(), now.getFingerprint(), now.getPsname(), now.getPssurname(), now.getPslastname(),
@@ -65,7 +58,7 @@ public class BdFunctionsService {
         output.setEntry(nextGeneratedEntityRepository.entry_check());
         System.out.println(output.getEntry());
         Thread.sleep(100);
-        DocumentPack documentPack = documentPackRepository.findAll().getFirst();
+        DocumentPack documentPack = documentPackRepository.findAll().get(0);
         System.out.println(documentPack.getWorkPermissionId());
         if (documentPack.getWorkPermissionId() != null){
             output.setWork(nextGeneratedEntityRepository.work_check());
