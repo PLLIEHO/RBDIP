@@ -70,7 +70,9 @@ public class FullInfoService {
             CustomsDTO custom = new CustomsDTO();
             custom.setMax_size(customs.getMax_size());
             custom.setMax_weight(customs.getMax_weight());
-            custom.setName(getByIdService.getCustomsInfo(customs.getCategory_id()).get(0));
+            var info = getByIdService.getCustomsInfo(customs.getCategory_id());
+            custom.setName(info.get(0));
+            custom.set_importable(Boolean.parseBoolean(info.get(1)));
             output.add(mapper.valueToTree(custom));
             System.out.println(output);
         }
