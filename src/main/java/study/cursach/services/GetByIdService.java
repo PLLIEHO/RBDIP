@@ -36,7 +36,7 @@ public class GetByIdService {
     }
 
 
-    public String getEntryPurpose(int id){
+    public String getEntryPurpose(Integer id){
         try {
             return entryPurposeRepository.findById(id).get().getName();
         } catch (Exception e){
@@ -44,7 +44,7 @@ public class GetByIdService {
         }
     }
 
-    public String getCompanyName(int id, int flag){
+    public String getCompanyName(Integer id, int flag){
         try {
             int company_id;
             if (flag == 0) {
@@ -58,7 +58,7 @@ public class GetByIdService {
         }
     }
 
-    public String getJobTypeName(int id){
+    public String getJobTypeName(Integer id){
         try {
             return jobTypeRepository.findById(id).get().getName();
         } catch (Exception e){
@@ -66,7 +66,7 @@ public class GetByIdService {
         }
     }
 
-    public String getCountryName(int id){
+    public String getCountryName(Integer id){
         try {
             return countryEntityRepository.findById(id).get().getName();
         } catch (Exception e){
@@ -74,7 +74,7 @@ public class GetByIdService {
         }
     }
 
-    public boolean isInEntryList(int id){
+    public boolean isInEntryList(Integer id){
         try{
             entryListRepository.findById(id).get();
             return true;
@@ -84,7 +84,7 @@ public class GetByIdService {
     }
 
 
-    public List<String> getCustomsInfo(int id){
+    public List<String> getCustomsInfo(Integer id){
         List<String> output = new ArrayList<>();
         try{
             CustomsCategory category = customsCategoryRepository.findById(id).get();
