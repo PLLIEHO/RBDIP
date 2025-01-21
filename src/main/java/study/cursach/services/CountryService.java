@@ -14,7 +14,6 @@ public class CountryService {
     @Inject
     CountryEntityRepository countryRepo;
 
-
     public List<CountryEntity> getCountries() {
         return new ArrayList<>(countryRepo.findAll());
     }

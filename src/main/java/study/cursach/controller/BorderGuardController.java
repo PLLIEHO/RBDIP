@@ -40,7 +40,7 @@ public class BorderGuardController {
     @GetMapping("/job")
     public ResponseEntity<?> getJob() {
         try {
-            return ResponseEntity.ok(fullInfoService.getJobs());
+            return ResponseEntity.ok(fullInfoService.getJob());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
         }
