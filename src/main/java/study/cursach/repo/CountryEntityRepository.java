@@ -4,5 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import study.cursach.entity.CountryEntity;
 
 public interface CountryEntityRepository extends JpaRepository<CountryEntity, Integer> {
+
     boolean existsCountryEntityByName(String name);
+
 }

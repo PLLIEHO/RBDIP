@@ -2,8 +2,6 @@ package study.cursach.services;
 
 import jakarta.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import study.cursach.dto.Validation;
 import study.cursach.entity.*;
@@ -32,33 +30,24 @@ public class BdFunctionsService {
     @Inject
     CriminalEntityRepository criminalEntityRepository;
 
-    Logger logger = LoggerFactory.getLogger(BdFunctionsService.class);
-
 
     public void nextOne(boolean accepted) {
         NextGeneratedEntity now = nextGeneratedEntityRepository.findAllByOrderById().get(0);
-        logger.info("NextOne from bd: {}", now.toString());
+
         if (accepted) {
             EntryList entryList = new EntryList();
             entryList.setPassportId(now.getId());
             entryListRepository.save(entryList);
-            logger.info("Saved nextOne to entry list");
         }
 
         nextGeneratedEntityRepository.deleteById(now.getId());
-        logger.info("Deleted nextOne last instance");
     }
 
-    public Validation validate(){
+    public Validation validate() throws InterruptedException {
         NextGeneratedEntity now = nextGeneratedEntityRepository.findAllByOrderById().get(0);
-        logger.info("Validate from bd: {}", now.toString());
         boolean workPurpose = Objects.equals(getByIdService.getEntryPurpose(now.getEnpurpose()), "Работа");
         boolean decStatus = now.getLugsize() != null && now.getLugweight() != null;
         Validation output = new Validation();
-        if (now.getName() == null && now.getSurname() == null && now.getLastname() == null){
-            output.setPassport("You should have name, surname, lastname");
-            return output;
-        }
         output.setPassport(passportCheck(now));
         output.setEntry(entryCheck(now));
         if (workPurpose) {
@@ -72,12 +61,10 @@ public class BdFunctionsService {
             output.setDeclaration("No declaration needed.");
         }
         output.setCriminal(criminalCheck(now));
-        logger.info("Validate sent to client: {}", output);
         return output;
     }
 
     public String passportCheck(NextGeneratedEntity now) {
-        logger.info("Started passport check");
         StringBuilder out = new StringBuilder();
         if (!Objects.equals(now.getName(), now.getPsname())) {
             out.append("names not equal, ");
@@ -107,12 +94,7 @@ public class BdFunctionsService {
     }
 
     public String entryCheck(NextGeneratedEntity now) {
-        logger.info("Started entry permission check");
         StringBuilder out = new StringBuilder();
-        if (now.getEndateExpired() == null || now.getEndateGaned() == null){
-            out.append("Date can not be null.");
-            return out.toString();
-        }
         if (!Objects.equals(now.getName(), now.getEnname())) {
             out.append("names not equal, ");
         }
@@ -142,7 +124,6 @@ public class BdFunctionsService {
 
 
     public String workCheck(NextGeneratedEntity now) {
-        logger.info("Started work permission check");
         StringBuilder out = new StringBuilder();
         if (!Objects.equals(now.getName(), now.getWorkname())) {
             out.append("names not equal, ");
@@ -152,10 +133,6 @@ public class BdFunctionsService {
         }
         if (!Objects.equals(now.getLastname(), now.getWorklastname())) {
             out.append("lastnames not equal, ");
-        }
-        if (now.getWorkcompany() == null){
-            out.append("Work company can not be null");
-            return out.toString();
         }
         JobEntity jobEntity = jobEntityRepository.findById(now.getWorkcompany()).orElse(null);
         if (jobEntity != null) {
@@ -174,7 +151,6 @@ public class BdFunctionsService {
     }
 
     public String declarationCheck(NextGeneratedEntity now) {
-        logger.info("Started declaration check");
         StringBuilder out = new StringBuilder();
         if (!Objects.equals(now.getName(), now.getDecname())) {
             out.append("names not equal, ");
@@ -194,10 +170,6 @@ public class BdFunctionsService {
         if (!Objects.equals(now.getDeccat(), now.getLugcategory())) {
             out.append("luggage category not equal, ");
         } else {
-            if (now.getDeccat() == null){
-                out.append("category id can not be null.");
-                return out.toString();
-            }
             CustomsCategory customsCategory = customsCategoryRepository.findById(now.getDeccat()).orElse(null);
             if (customsCategory == null) {
                 out.append("unknown luggage category, ");
@@ -212,18 +184,16 @@ public class BdFunctionsService {
                 }
             }
         }
-        logger.info("5");
         if (!out.isEmpty()) {
             out.delete(out.length() - 2, out.length());
             out.append(".");
             out.replace(0, 1, String.valueOf(out.charAt(0)).toUpperCase());
         }
-        logger.info("6");
         return out.toString();
     }
 
     public String criminalCheck(NextGeneratedEntity now) {
-        logger.info("Started criminal check");
+
         for (CriminalEntity criminalEntity : criminalEntityRepository.findAll()) {
             if (Objects.equals(criminalEntity.getName(), now.getName()) &&
                     Objects.equals(criminalEntity.getSurname(), now.getSurname()) &&
@@ -235,21 +205,5 @@ public class BdFunctionsService {
             }
         }
         return "It's not a criminal.";
-    }
-
-    public String apply(NextGeneratedEntity nextGeneratedEntity){
-        try{
-            var all = nextGeneratedEntityRepository.findAllByOrderById();
-            if (all.isEmpty()) {
-                nextGeneratedEntity.setId(1);
-            } else {
-                var last = all.get(all.size() - 1);
-                nextGeneratedEntity.setId(last.getId() + 1);
-            }
-            nextGeneratedEntityRepository.save(nextGeneratedEntity);
-            return "You have successfully stood in the queue";
-        } catch (Exception e){
-            return "Internal server error";
-        }
     }
 }
