@@ -24,7 +24,7 @@ public class BorderGuardController {
         try {
             return ResponseEntity.ok(fullInfoService.getNext());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("База данных умерла :((((");
+            return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
         }
     }
 
@@ -33,7 +33,7 @@ public class BorderGuardController {
         try {
             return ResponseEntity.ok(countryService.getCountries());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("База данных умерла :((((");
+            return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
         }
     }
 
@@ -42,7 +42,7 @@ public class BorderGuardController {
         try {
             return ResponseEntity.ok(fullInfoService.getJobs());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("База данных умерла :((((");
+            return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
         }
     }
 
@@ -51,7 +51,7 @@ public class BorderGuardController {
         try {
             return ResponseEntity.ok(fullInfoService.getCriminal());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("База данных умерла :((((");
+            return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
         }
     }
 
@@ -61,7 +61,7 @@ public class BorderGuardController {
             System.out.println(fullInfoService.getInstruction());
             return ResponseEntity.ok(fullInfoService.getInstruction());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("База данных умерла :((((");
+            return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
         }
     }
 
@@ -70,7 +70,7 @@ public class BorderGuardController {
         try {
             return ResponseEntity.ok(fullInfoService.getCustomsParam());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("База данных умерла :((((");
+            return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
         }
     }
 
@@ -89,7 +89,7 @@ public class BorderGuardController {
             bdFunctionsService.nextOne(true);
             return ResponseEntity.ok("Success");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Fail");
+            return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
         }
     }
 
@@ -100,7 +100,7 @@ public class BorderGuardController {
             bdFunctionsService.nextOne(false);
             return ResponseEntity.ok("Success");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Fail");
+            return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
         }
     }
 
