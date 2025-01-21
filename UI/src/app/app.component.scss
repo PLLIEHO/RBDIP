@@ -1,0 +1,24 @@
+.logo {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.margin-minus {
+    margin-top:-20px;
+}
+
+.margin-plus {
+    margin-top:50px;
+}
+
+.logo img {
+    width:25%;
+    aspect-ratio: 3/2;
+    object-fit: contain;
+}
+
+.background {
+    background-image: url("/assets/images/jpg/b.jpg");
+    background-size: 100% 100%;
+}
+

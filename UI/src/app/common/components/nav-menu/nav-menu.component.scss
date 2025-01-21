@@ -1,0 +1,52 @@
+.nav-link {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.nested-dropdown {
+    padding: 0.25rem 1.5rem !important;
+}
+
+.navbar-nav > li{
+    margin-left:30px;
+    margin-right:25px;
+  }
+
+.logo-label {
+    margin-top: 1%;
+    display: inline;
+    margin-right: 30%;
+    white-space: nowrap;
+}
+
+.logos img {
+    width:10%;
+    aspect-ratio: 10/6;
+    object-fit: contain;
+}
+
+.m-l-10 {
+    margin-left: 10%;
+}
+
+.home img {
+    width:30%;
+    aspect-ratio: 3/2;
+    object-fit: contain;
+    float: right;
+}
+
+.home a {
+    display:block;
+}
+
+.m-r-30 {
+    margin-right: 30%;
+}
+
+.m-r-30 :last-child {
+    margin-right: 0%;
+}
+
+
+

@@ -1,0 +1,14 @@
+<div class="text-center">
+  <h1>Результаты автоматической проверки: </h1>
+  <br/>
+  <h3>Паспорт: {{this.validation.passport}}</h3>
+  <h3>Разрешение на въезд: {{this.validation.entry}}</h3>
+  <h3>Расрешение на работу: {{this.validation.work}}</h3>
+  <h3>Декларация: {{this.validation.declaration}}</h3>
+  <h3>Проверка по базе розыска: {{this.validation.criminal}}</h3>
+
+  <button mat-button color="primary"
+          (click)="reload()">
+    Понял
+  </button>
+</div>

@@ -1,0 +1,13 @@
+<div class="text-center">
+    <h3>Выберите причину: </h3>
+  <mat-form-field>
+    <mat-label>Причины</mat-label>
+    <mat-select [(ngModel)]="chosenReason">
+      <mat-option *ngFor="let rs of reasonList" [value]="rs">
+        {{rs}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+    <button mat-flat-button (click)="ok()">Да</button>
+    <button mat-flat-button (click)="notOk()">Нет</button>
+</div>

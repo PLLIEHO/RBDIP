@@ -1,0 +1,36 @@
+<h1 class="text-center">Добрый день, уважаемый сотрудник! Инструкции на сегодня:</h1>
+<br/>
+<ng-container style="background-color: brown;" *ngIf="isProblem">
+  <h1 class="text-center" style="color:red">Обнаружена проблема, попробуйте позже или обратитесь в поддержку</h1>
+</ng-container>
+<ng-container *ngIf="!isProblem">
+  <div class="text-center tableFixHead">
+    <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <th mat-header-cell>Инструкция</th>
+        <th mat-header-cell>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <th>Страна регистрации</th>
+        <th>Цвет глаз</th>
+        <th>Дата инструкции</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let passport of instructions">
+        <td>{{passport?.positive_negative_type ? "Пускать только: " : "Не пускать с: "}}</td>
+        <td>{{passport?.name}}</td>
+        <td>{{passport?.surname}}</td>
+        <td>
+          {{passport?.lastname}}
+        </td>
+        <td>{{passport?.nationality}}</td>
+        <td><div style="width:60px;height:60px;" [ngStyle]="{'background-color': this.getEyeColor(passport?.eye_color)}"><img src="/assets/images/png/eye.png" alt="{{this.getEyeColor(passport?.eye_color)}}" title="{{this.getEyeColor(passport?.eye_color)}}" width="60" height="60"></div></td>
+        <td>{{passport?.date_of_order}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <br/>
+</ng-container>
