@@ -1,0 +1,30 @@
+.background {
+  background-color: #f8f9fa;
+  width:7%;
+  height: 200%;
+  position:fixed;
+  float: left;
+}
+
+.logos img {
+  width:50%;
+  margin-top: 50%;
+  margin-left:32%;
+  aspect-ratio: 3/2;
+  object-fit: contain;
+}
+
+.m-t-minus-10 {
+  margin-top: -7%;
+}
+
+div#dropdown-basic {
+  width: fit-content;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.height_scroll {
+  height: 10%;
+  overflow-y: scroll;
+}

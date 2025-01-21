@@ -1,0 +1,35 @@
+<h1 class="text-center">Розыск</h1>
+<br/>
+<ng-container style="background-color: brown;" *ngIf="isProblem">
+    <h1 class="text-center" style="color:red">Обнаружена проблема, попробуйте позже или обратитесь в поддержку</h1>
+</ng-container>
+<ng-container *ngIf="!isProblem">
+    <div class="text-center tableFixHead">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Отчество</th>
+                    <th>Страна регистрации</th>
+                    <th>Цвет глаз</th>
+                    <th>Отпечаток</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let passport of criminals">
+                  <td>{{passport?.name}}</td>
+                  <td>{{passport?.surname}}</td>
+                  <td>
+                    {{passport?.lastname == null ? " - " : this.passport?.lastname}}
+                  </td>
+                  <td>{{passport?.nationality}}</td>
+                  <td><div style="width:60px;height:60px;" [ngStyle]="{'background-color': this.getEyeColor(passport?.eye_color)}"><img src="/assets/images/png/eye.png" alt="{{this.getEyeColor(passport?.eye_color)}}" title="{{this.getEyeColor(passport?.eye_color)}}" width="60" height="60"></div></td>
+                  <td><img src="/assets/images/png/fingerprint.png" alt="{{passport?.fingerprint}}" title="{{passport?.fingerprint}}" width="60" height="60"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  <br/>
+</ng-container>
+

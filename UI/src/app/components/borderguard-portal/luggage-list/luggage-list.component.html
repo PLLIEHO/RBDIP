@@ -1,0 +1,29 @@
+<h1 class="text-center">Список категорий ввозимого груза</h1>
+<br/>
+<ng-container style="background-color: brown;" *ngIf="isProblem">
+    <h1 class="text-center" style="color:red">Обнаружена проблема, попробуйте позже или обратитесь в поддержку</h1>
+</ng-container>
+<ng-container *ngIf="!isProblem">
+    <div class="text-center tableFixHead">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Категория</th>
+                    <th>Максимальный объём</th>
+                    <th>Максимальный вес</th>
+                    <th>Разрешение на ввоз:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cat of luggageCats">
+                    <td>{{cat?.name}}</td>
+                    <td>{{cat?.max_size}}</td>
+                    <td>{{cat?.max_weight}}</td>
+                    <td>{{cat?._importable ? "Разрешено" : "Запрещено"}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  <br/>
+</ng-container>
+

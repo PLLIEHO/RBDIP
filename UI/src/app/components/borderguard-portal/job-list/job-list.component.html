@@ -1,0 +1,27 @@
+<h1 class="text-center">Список известных стран</h1>
+<br/>
+<ng-container style="background-color: brown;" *ngIf="isProblem">
+    <h1 class="text-center" style="color:red">Обнаружена проблема, попробуйте позже или обратитесь в поддержку</h1>
+</ng-container>
+<ng-container *ngIf="!isProblem">
+    <div class="text-center tableFixHead">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Работодатель</th>
+                    <th>Тип работ</th>
+                    <th>Количество вакансий</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let job of jobs">
+                    <td>{{job?.company}}</td>
+                    <td>{{job?.type}}</td>
+                    <td>{{job?.capacity}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  <br/>
+</ng-container>
+

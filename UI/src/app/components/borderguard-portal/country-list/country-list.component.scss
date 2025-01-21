@@ -1,0 +1,13 @@
+.center-button {
+    margin: 0 auto;
+    display: block;
+    font-size: large;
+    width:20%;
+    height: 100%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+  }
+
+.tableFixHead          { overflow: auto; height: 50%px; }
+.tableFixHead thead th { position: sticky; top: 0; z-index: 1; background:#eee; }
+
