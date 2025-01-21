@@ -1,6 +1,8 @@
 package study.cursach.util;
 
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import study.cursach.dto.*;
 import study.cursach.entity.*;
@@ -15,9 +17,10 @@ public class Parser {
     GetByIdService getByIdService;
 
     private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
+    Logger logger = LoggerFactory.getLogger(Parser.class);
 
     public JobDTO jobToDTO(JobEntity job) {
+        logger.info("Converting job to DTO");
         JobDTO jobDTO = new JobDTO();
         jobDTO.setCapacity(job.getCapacity());
         jobDTO.setCompany(getByIdService.getCompanyName(job.getCompany_id()));
@@ -26,6 +29,7 @@ public class Parser {
     }
 
     public CriminalDTO criminalToDTO(CriminalEntity criminal) {
+        logger.info("Converting criminal to DTO");
         CriminalDTO criminalDTO = new CriminalDTO();
         criminalDTO.setSurname(criminal.getSurname());
         criminalDTO.setName(criminal.getName());
@@ -37,6 +41,7 @@ public class Parser {
     }
 
     public CustomsDTO customToDTO(CustomsParamEntity customs) {
+        logger.info("Converting custom to DTO");
         CustomsDTO custom = new CustomsDTO();
         custom.setMax_size(customs.getMax_size());
         custom.setMax_weight(customs.getMax_weight());
@@ -47,6 +52,7 @@ public class Parser {
     }
 
     public InstructionDTO instructionToDTO(InstructionEntity instruction) {
+        logger.info("Converting instruction to DTO");
         InstructionDTO instructionDTO = new InstructionDTO();
         instructionDTO.setName(instruction.getName());
         instructionDTO.setLastname(instruction.getLastname());
@@ -61,6 +67,7 @@ public class Parser {
     }
 
     public NextDTO nextToDTO(NextGeneratedEntity next) {
+        logger.info("Converting nextOne to DTO");
         NextDTO nextDTO = new NextDTO();
         nextDTO.setName(next.getName());
         nextDTO.setSurname(next.getSurname());

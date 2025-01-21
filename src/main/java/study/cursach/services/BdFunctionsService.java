@@ -2,6 +2,8 @@ package study.cursach.services;
 
 import jakarta.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import study.cursach.dto.Validation;
 import study.cursach.entity.*;
@@ -30,21 +32,26 @@ public class BdFunctionsService {
     @Inject
     CriminalEntityRepository criminalEntityRepository;
 
+    Logger logger = LoggerFactory.getLogger(BdFunctionsService.class);
+
 
     public void nextOne(boolean accepted) {
         NextGeneratedEntity now = nextGeneratedEntityRepository.findAllByOrderById().get(0);
-
+        logger.info("NextOne from bd: {}", now.toString());
         if (accepted) {
             EntryList entryList = new EntryList();
             entryList.setPassportId(now.getId());
             entryListRepository.save(entryList);
+            logger.info("Saved nextOne to entry list");
         }
 
         nextGeneratedEntityRepository.deleteById(now.getId());
+        logger.info("Deleted nextOne last instance");
     }
 
-    public Validation validate() throws InterruptedException {
+    public Validation validate(){
         NextGeneratedEntity now = nextGeneratedEntityRepository.findAllByOrderById().get(0);
+        logger.info("Validate from bd: {}", now.toString());
         boolean workPurpose = Objects.equals(getByIdService.getEntryPurpose(now.getEnpurpose()), "Работа");
         boolean decStatus = now.getLugsize() != null && now.getLugweight() != null;
         Validation output = new Validation();
@@ -61,10 +68,12 @@ public class BdFunctionsService {
             output.setDeclaration("No declaration needed.");
         }
         output.setCriminal(criminalCheck(now));
+        logger.info("Validate sent to client: {}", output);
         return output;
     }
 
     public String passportCheck(NextGeneratedEntity now) {
+        logger.info("Started passport check");
         StringBuilder out = new StringBuilder();
         if (!Objects.equals(now.getName(), now.getPsname())) {
             out.append("names not equal, ");
@@ -94,6 +103,7 @@ public class BdFunctionsService {
     }
 
     public String entryCheck(NextGeneratedEntity now) {
+        logger.info("Started entry permission check");
         StringBuilder out = new StringBuilder();
         if (!Objects.equals(now.getName(), now.getEnname())) {
             out.append("names not equal, ");
@@ -124,6 +134,7 @@ public class BdFunctionsService {
 
 
     public String workCheck(NextGeneratedEntity now) {
+        logger.info("Started work permission check");
         StringBuilder out = new StringBuilder();
         if (!Objects.equals(now.getName(), now.getWorkname())) {
             out.append("names not equal, ");
@@ -151,6 +162,7 @@ public class BdFunctionsService {
     }
 
     public String declarationCheck(NextGeneratedEntity now) {
+        logger.info("Started declaration check");
         StringBuilder out = new StringBuilder();
         if (!Objects.equals(now.getName(), now.getDecname())) {
             out.append("names not equal, ");
@@ -193,7 +205,7 @@ public class BdFunctionsService {
     }
 
     public String criminalCheck(NextGeneratedEntity now) {
-
+        logger.info("Started criminal check");
         for (CriminalEntity criminalEntity : criminalEntityRepository.findAll()) {
             if (Objects.equals(criminalEntity.getName(), now.getName()) &&
                     Objects.equals(criminalEntity.getSurname(), now.getSurname()) &&
