@@ -1,15 +1,11 @@
 package study.cursach.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Primary;
+import lombok.Data;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
+@Data
 @Entity
-@Getter
 @Table(name = "instruction")
 public class InstructionEntity {
     @Id

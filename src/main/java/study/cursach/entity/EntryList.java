@@ -1,11 +1,10 @@
 package study.cursach.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+
+@Data
 @Entity
 @Table(name = "entry_list")
 public class EntryList {

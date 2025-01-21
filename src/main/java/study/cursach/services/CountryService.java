@@ -1,6 +1,6 @@
 package study.cursach.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.inject.Inject;
 import org.springframework.stereotype.Service;
 import study.cursach.entity.CountryEntity;
 import study.cursach.repo.CountryEntityRepository;
@@ -11,13 +11,12 @@ import java.util.List;
 @Service
 public class CountryService {
 
-    private final CountryEntityRepository countryRepo;
+    @Inject
+    CountryEntityRepository countryRepo;
 
-    public CountryService(CountryEntityRepository countryRepo){
-        this.countryRepo = countryRepo;
-    }
-    public List<CountryEntity> getCountries(){
+
+    public List<CountryEntity> getCountries() {
         return new ArrayList<>(countryRepo.findAll());
-        }
+    }
 }
 

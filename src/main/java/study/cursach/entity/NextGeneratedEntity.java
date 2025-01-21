@@ -4,18 +4,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Date;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
-@Getter
-@Setter
+@Data
 @Table(name = "next_generated")
 public class NextGeneratedEntity {
 

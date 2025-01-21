@@ -3,6 +3,7 @@ package study.cursach.services;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import jakarta.inject.Inject;
 import org.springframework.stereotype.Service;
 import study.cursach.dto.*;
 import study.cursach.entity.*;
@@ -13,29 +14,22 @@ import java.text.SimpleDateFormat;
 @Service
 public class FullInfoService {
 
-    private final ObjectMapper mapper = new ObjectMapper();
-    private final CriminalEntityRepository criminalEntityRepository;
-    private final CustomsParamEntityRepository customsParamEntityRepository;
-    private final InstructionEntityRepository instructionEntityRepository;
-    private final GetByIdService getByIdService;
+    @Inject
+    CriminalEntityRepository criminalEntityRepository;
+    @Inject
+    CustomsParamEntityRepository customsParamEntityRepository;
+    @Inject
+    InstructionEntityRepository instructionEntityRepository;
+    @Inject
+    GetByIdService getByIdService;
+    @Inject
+    NextGeneratedEntityRepository nextGeneratedEntityRepository;
+    @Inject
+    JobEntityRepository jobEntityRepository;
 
-    private final NextGeneratedEntityRepository nextGeneratedEntityRepository;
-    private final JobEntityRepository jobEntityRepository;
     private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    private final ObjectMapper mapper = new ObjectMapper();
 
-    public FullInfoService(CriminalEntityRepository criminalEntityRepository,
-                           CustomsParamEntityRepository customsParamEntityRepository,
-                           InstructionEntityRepository instructionEntityRepository,
-                           JobEntityRepository jobEntityRepository,
-                           NextGeneratedEntityRepository nextGeneratedEntityRepository,
-                           GetByIdService getByIdService){
-        this.criminalEntityRepository = criminalEntityRepository;
-        this.customsParamEntityRepository = customsParamEntityRepository;
-        this.instructionEntityRepository = instructionEntityRepository;
-        this.jobEntityRepository = jobEntityRepository;
-        this.nextGeneratedEntityRepository = nextGeneratedEntityRepository;
-        this.getByIdService = getByIdService;
-    }
 
     public ArrayNode getJobs() {
         ArrayNode output = mapper.createArrayNode();

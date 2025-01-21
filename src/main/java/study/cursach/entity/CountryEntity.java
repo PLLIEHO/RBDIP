@@ -1,16 +1,11 @@
 package study.cursach.entity;
 
 import jakarta.persistence.*;
-import jdk.jfr.DataAmount;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
+@Data
 @Entity
-@Getter
 @Table(name = "country")
 public class CountryEntity {
     @Id

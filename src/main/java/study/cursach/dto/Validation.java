@@ -1,18 +1,12 @@
 package study.cursach.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Validation {
     private String passport;
     private String entry;
-    private String work = "Not included";
-    private String declaration = "Not included";
+    private String work;
+    private String declaration;
     private String criminal;
 }

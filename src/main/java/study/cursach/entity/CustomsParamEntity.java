@@ -1,14 +1,11 @@
 package study.cursach.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
+@Data
 @Entity
-@Getter
 @Table(name = "customs_param")
 public class CustomsParamEntity {
     @Id
