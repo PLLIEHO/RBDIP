@@ -25,6 +25,8 @@ dependencies {
     runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
     runtimeOnly 'org.postgresql:postgresql'
     implementation 'jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0'
+    implementation 'com.mashape.unirest:unirest-java:1.4.9'
+
 
 
 

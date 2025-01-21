@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import study.cursach.entity.NextGeneratedEntity;
 import study.cursach.services.*;
 
 
@@ -90,13 +91,13 @@ public class BorderGuardController {
 
     @GetMapping("/validate")
     public ResponseEntity<?> validate() {
-        try {
+//        try {
             logger.info("Get validate request");
             return ResponseEntity.ok(bdFunctionsService.validate());
-        } catch (Exception e) {
-            logger.error("500 sent to client from validate");
-            return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
-        }
+//        } catch (Exception e) {
+//            logger.error("500 sent to client from validate");
+//            return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
+//        }
     }
 
     @GetMapping("/allow")
@@ -120,6 +121,17 @@ public class BorderGuardController {
             return ResponseEntity.ok("Success");
         } catch (Exception e) {
             logger.error("500 sent to client from decline");
+            return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
+        }
+    }
+
+    @PostMapping("/apply")
+    public ResponseEntity<?> apply(@RequestBody NextGeneratedEntity nextGeneratedEntity) {
+        try{
+            logger.info("Get apply request");
+            return ResponseEntity.ok(bdFunctionsService.apply(nextGeneratedEntity));
+        } catch (Exception e){
+            logger.error("500 sent to client from apply");
             return ResponseEntity.status(500).body("Внутреняя ошибка сервера");
         }
     }

@@ -55,6 +55,10 @@ public class BdFunctionsService {
         boolean workPurpose = Objects.equals(getByIdService.getEntryPurpose(now.getEnpurpose()), "Работа");
         boolean decStatus = now.getLugsize() != null && now.getLugweight() != null;
         Validation output = new Validation();
+        if (now.getName() == null && now.getSurname() == null && now.getLastname() == null){
+            output.setPassport("You should have name, surname, lastname");
+            return output;
+        }
         output.setPassport(passportCheck(now));
         output.setEntry(entryCheck(now));
         if (workPurpose) {
@@ -105,6 +109,10 @@ public class BdFunctionsService {
     public String entryCheck(NextGeneratedEntity now) {
         logger.info("Started entry permission check");
         StringBuilder out = new StringBuilder();
+        if (now.getEndateExpired() == null || now.getEndateGaned() == null){
+            out.append("Date can not be null.");
+            return out.toString();
+        }
         if (!Objects.equals(now.getName(), now.getEnname())) {
             out.append("names not equal, ");
         }
@@ -145,6 +153,10 @@ public class BdFunctionsService {
         if (!Objects.equals(now.getLastname(), now.getWorklastname())) {
             out.append("lastnames not equal, ");
         }
+        if (now.getWorkcompany() == null){
+            out.append("Work company can not be null");
+            return out.toString();
+        }
         JobEntity jobEntity = jobEntityRepository.findById(now.getWorkcompany()).orElse(null);
         if (jobEntity != null) {
             if (jobEntity.getCapacity() == 0) {
@@ -182,6 +194,10 @@ public class BdFunctionsService {
         if (!Objects.equals(now.getDeccat(), now.getLugcategory())) {
             out.append("luggage category not equal, ");
         } else {
+            if (now.getDeccat() == null){
+                out.append("category id can not be null.");
+                return out.toString();
+            }
             CustomsCategory customsCategory = customsCategoryRepository.findById(now.getDeccat()).orElse(null);
             if (customsCategory == null) {
                 out.append("unknown luggage category, ");
@@ -196,11 +212,13 @@ public class BdFunctionsService {
                 }
             }
         }
+        logger.info("5");
         if (!out.isEmpty()) {
             out.delete(out.length() - 2, out.length());
             out.append(".");
             out.replace(0, 1, String.valueOf(out.charAt(0)).toUpperCase());
         }
+        logger.info("6");
         return out.toString();
     }
 
@@ -217,5 +235,21 @@ public class BdFunctionsService {
             }
         }
         return "It's not a criminal.";
+    }
+
+    public String apply(NextGeneratedEntity nextGeneratedEntity){
+        try{
+            var all = nextGeneratedEntityRepository.findAllByOrderById();
+            if (all.isEmpty()) {
+                nextGeneratedEntity.setId(1);
+            } else {
+                var last = all.get(all.size() - 1);
+                nextGeneratedEntity.setId(last.getId() + 1);
+            }
+            nextGeneratedEntityRepository.save(nextGeneratedEntity);
+            return "You have successfully stood in the queue";
+        } catch (Exception e){
+            return "Internal server error";
+        }
     }
 }
