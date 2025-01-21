@@ -1,0 +1,189 @@
+<h1 class="text-center">Входящая заявка на въезд</h1>
+<br/>
+<ng-container style="background-color: brown;" *ngIf="isProblem">
+    <h1 class="text-center" style="color:red">Обнаружена проблема, попробуйте позже или обратитесь в поддержку</h1>
+</ng-container>
+<ng-container *ngIf="!isProblem">
+    <div class="text-center tableFixHead">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Отчество</th>
+                    <th>Страна регистрации</th>
+                    <th>Зафиксированный цвет глаз</th>
+                    <th>Отпечаток, взятый на КПП</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{this.order?.name}}</td>
+                    <td>{{this.order?.surname}}</td>
+                    <td>
+                      {{this.order?.lastname == null ? " - " : this.order?.lastname}}
+                    </td>
+                    <td>{{this.order?.nationality}}</td>
+                  <td><div style="width:60px;height:60px;" [ngStyle]="{'background-color': this.eyeColor}"><img src="/assets/images/png/eye.png" alt="{{this.eyeColor}}" title="{{this.eyeColor}}" width="60" height="60"></div></td>
+                    <td><img src="/assets/images/png/fingerprint.png" alt="{{this.order?.fingerprint}}" title="{{this.order?.fingerprint}}" width="60" height="60"></td>
+                </tr>
+            </tbody>
+        </table>
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>Объём багажа</th>
+          <th>Вес багажа</th>
+          <th>Категория багажа</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{this.order?.lugsize}}</td>
+          <td>{{this.order?.lugweight}}</td>
+          <td>
+            {{this.luggageCat}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <br/>
+</ng-container>
+
+<h1 class="text-center">Приложенные документы:</h1>
+<h1 class="text-center">Паспорт:</h1>
+<ng-container *ngIf="!isProblem">
+  <div class="text-center tableFixHead">
+    <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <th>Страна регистрации</th>
+        <th>Цвет глаз</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{this.passport?.name}}</td>
+        <td>{{this.passport?.surname}}</td>
+        <td>
+          {{this.passport?.lastname == null ? " - " : this.passport?.lastname}}
+        </td>
+        <td>{{this.passport?.nationality}}</td>
+        <td><div style="width:60px;height:60px;" [ngStyle]="{'background-color': this.eyeColorPassport}"><img src="/assets/images/png/eye.png" alt="{{this.eyeColorPassport}}" title="{{this.eyeColorPassport}}" width="60" height="60"></div></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <br/>
+</ng-container>
+
+<h1 class="text-center">Разрешение на въезд:</h1>
+<ng-container style="background-color: brown;" *ngIf="this.entry == null">
+  <h1 class="text-center" style="color:red">Отсутствует</h1>
+</ng-container>
+<ng-container *ngIf="!isProblem && this.entry!=null">
+  <div class="text-center tableFixHead">
+    <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <th>Дата выдачи</th>
+        <th>Дата окончания</th>
+        <th>Причина въезда</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{this.entry?.name == null ? " - " : this.entry?.name}}</td>
+        <td>{{this.entry?.surname == null ? " - " : this.entry?.surname}}</td>
+        <td>
+          {{this.entry?.lastname == null ? " - " : this.entry?.lastname}}
+        </td>
+        <td>{{this.entry?.dateGained == null ? " - " : this.entry?.dateGained}}</td>
+        <td>{{this.entry?.dateExpired == null ? " - " : this.entry?.dateExpired}}</td>
+        <td>{{this.entry?.purpose == null ? " - " : this.entry?.purpose}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <br/>
+</ng-container>
+
+<div *ngIf="this.entry?.purpose == 'work'">
+<h1 class="text-center">Разрешение на работу:</h1>
+  <ng-container style="background-color: brown;" *ngIf="this.work == null">
+    <h1 class="text-center" style="color:red">Отсутствует</h1>
+  </ng-container>
+<ng-container *ngIf="!isProblem && this.work != null">
+  <div class="text-center tableFixHead">
+    <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <th>Работодатель</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{this.work?.name == null ? " - " : this.work?.name}}</td>
+        <td>{{this.work?.surname == null ? " - " : this.work?.surname}}</td>
+        <td>
+          {{this.work?.lastname == null ? " - " : this.work?.lastname}}
+        </td>
+        <td>{{this.work?.company == null ? " - " : this.work?.company}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <br/>
+</ng-container>
+</div>
+
+<div *ngIf="this.luggageFlag">
+  <h1 class="text-center">Таможенная декларация:</h1>
+  <ng-container style="background-color: brown;" *ngIf="this.declaration == null">
+    <h1 class="text-center" style="color:red">Отсутствует</h1>
+  </ng-container>
+  <ng-container *ngIf="!isProblem && this.declaration != null">
+    <div class="text-center tableFixHead">
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>Имя</th>
+          <th>Фамилия</th>
+          <th>Отчество</th>
+          <th>Объём</th>
+          <th>Вес</th>
+          <th>Категория багажа</th>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{this.declaration?.name == null ? " - " : this.declaration?.name}}</td>
+          <td>{{this.declaration?.surname == null ? " - " : this.declaration?.surname}}</td>
+          <td>
+            {{this.declaration?.lastname == null ? " - " : this.declaration?.lastname}}
+          </td>
+          <td>{{this.declaration?.size == null ? " - " : this.declaration?.size}}</td>
+          <td>{{this.declaration?.weight == null ? " - " : this.declaration?.weight}}</td>
+          <td>{{this.declaration?.category == null ? " - " : this.declaration?.category}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <br/>
+  </ng-container>
+</div>
+
+<div class="text-center">
+  <button mat-button color="primary" class="center-button"
+          (click)="allow()">Допустить</button>
+  <button mat-button color="warn" class="center-button"
+          (click)="decline()">Отклонить</button>
+</div>

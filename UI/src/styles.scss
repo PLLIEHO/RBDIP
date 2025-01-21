@@ -1,0 +1,281 @@
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+.dropdown-pointer {
+  cursor: pointer;
+}
+
+.gray-color-label {
+  color: #727373;
+}
+
+body {
+  background: white;
+  font-size: 30px;
+  .alert {
+    font-size: 20px;
+  }
+}
+
+.header-position{
+  position: absolute;
+  top: 100px;
+}
+
+.result-container{
+  margin-top: -30px;
+}
+
+th {
+  font-weight: bold;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.table {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.back-opacitiy {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.flex-item-right {
+  align-self: flex-end;
+}
+
+.flex-item-left {
+  align-self: flex-start;
+}
+
+.form-field{
+  display: block
+}
+
+.inline-field {
+  display: flex;
+  float: left;
+}
+
+.scale-115{
+  transform: scale(1.15);
+}
+
+.scale-075{
+  transform: scale(0.75);
+}
+
+/*Start common margins*/
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+.mb-20 {
+  margin-bottom: 20px !important;
+}
+.mb-30 {
+  margin-bottom: 30px !important;
+}
+
+.mb-40 {
+  margin-bottom: 40px !important;
+}
+
+.mb-50 {
+  margin-bottom: 50px !important;
+}
+
+.mb-60 {
+  margin-bottom: 60px !important;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+.mt-20 {
+  margin-top: 20px !important;
+}
+
+.mt-30 {
+  margin-top: 30px !important;
+}
+
+.mt-40 {
+  margin-top: 40px !important;
+}
+
+.mt-50 {
+  margin-top: 50px !important;
+}
+
+.mt-60 {
+  margin-top: 60px !important;
+}
+
+.minus-margin-left {
+  margin-left: -10%;
+}
+
+.plus-margin-left {
+  margin-left: 10%;
+}
+
+.nom-10:nth-child(2) {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+/*End common margins*/
+
+/*Start buttons styles */
+
+.center-button {
+  margin: 0 auto;
+  display: block;
+  font-size: large;
+  width:20%;
+  height: 100%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.main-button {
+background-color: #4CAF50; /* Green */
+border: none; color: white;
+padding: 50px 32px;
+width: 100%;
+margin-top: 100px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 28px;
+font-weight: bold;
+}
+
+.button {
+  border-radius: 15px;
+  background-color: #002FA7;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  &-blue {
+    @extend .button;
+    background-color: blue;
+  }
+  &-red {
+    @extend .button;
+    background-color: red;
+  }
+  &-orange {
+    @extend .button;
+    background-color: orange;
+  }
+}
+.big-button:disabled, .bold-button:disabled, .button:disabled {
+  background-color: #d7d1ed82;
+}
+
+.big-button-red:disabled, .bold-button-red:disabled, .button-red:disabled {
+  background-color: rgba(255, 0, 0, 0.255);
+}
+
+.big-button-orange:disabled, .bold-button-orange:disabled, .button-orange:disabled {
+  background-color: rgba(255, 166, 0, 0.261);
+}
+
+.big-button-blue:disabled, .bold-button-blue:disabled, .button-blue:disabled {
+  background-color: rgba(0, 0, 255, 0.323);
+}
+
+.bold-button {
+  @extend .button;
+  margin: 15px 0;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  &-blue {
+    @extend .bold-button;
+    background-color: blue;
+  }
+  &-red {
+    @extend .bold-button;
+    background-color: red;
+  }
+  &-orange {
+    @extend .bold-button;
+    background-color: orange;
+  }
+}
+
+.big-button {
+  background-color: #4caf50;
+  border: none; color: white;
+  margin-top: 20px;
+  padding: 27px 32px;
+  width: 48%;
+  text-align: center;
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: bold;
+  &-red {
+    @extend .big-button;
+    background-color: red;
+  }
+  &-blue {
+    @extend .big-button;
+    background-color: blue;
+  }
+  &-orange {
+    @extend .big-button;
+    background-color: orange;
+  }
+}
+
+/*End button styles*/
+
+.mat-tab-group{
+  height: 100%;
+  width: 100%;
+}
+.mat-tab-body-wrapper {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.mat-tab-body {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.mat-tab-body-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.placehold  .mat-select-placeholder {
+  color: rgb(0 0 0 / 100%);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.mat-tooltip {
+  font-size: 16px !important;
+  text-align: center;
+}
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";

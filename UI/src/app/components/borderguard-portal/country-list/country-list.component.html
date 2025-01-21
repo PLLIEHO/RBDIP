@@ -1,0 +1,25 @@
+<h1 class="text-center">Список известных стран</h1>
+<br/>
+<ng-container style="background-color: brown;" *ngIf="isProblem">
+    <h1 class="text-center" style="color:red">Обнаружена проблема, попробуйте позже или обратитесь в поддержку</h1>
+</ng-container>
+<ng-container *ngIf="!isProblem">
+    <div class="text-center tableFixHead">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Официальное наименование</th>
+                    <th>Статус границ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let country of countries">
+                    <td>{{country?.name}}</td>
+                    <td>{{country?._borders_open ? "Открыты" : "Закрыты"}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  <br/>
+</ng-container>
+
